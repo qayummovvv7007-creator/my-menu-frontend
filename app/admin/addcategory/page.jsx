@@ -1,12 +1,12 @@
 const loadData = async () => {
   setLoading(true);
   try {
+    // localhost:5000 ni Render-dagi linkingizga almashtiring
     const [prodRes, catRes] = await Promise.all([
-      fetch("http://localhost:5000/api/products"),
-      fetch("http://localhost:5000/api/categories")
+      fetch("https://my-menu-backend-1.onrender.com/api/products"),
+      fetch("https://my-menu-backend-1.onrender.com/api/categories")
     ]);
 
-    // Agar resurs topilmasa, xatoni JSON qilmasdan oldin ko'ramiz
     if (!prodRes.ok || !catRes.ok) {
       throw new Error(`API xatosi: ${prodRes.status} yoki ${catRes.status}`);
     }
@@ -14,10 +14,13 @@ const loadData = async () => {
     const prodData = await prodRes.json();
     const catData = await catRes.json();
 
-    setProducts(prodData);
-    setCategories(catData);
+    // Ma'lumot massiv ekanligini tekshirib olish (xavfsizlik uchun)
+    setProducts(Array.isArray(prodData) ? prodData : []);
+    setCategories(Array.isArray(catData) ? catData : []);
+    
   } catch (err) {
     console.error("Ma'lumot yuklashda xato bo'ldi:", err.message);
+    setProducts([]); // Xato bo'lsa bo'sh massiv qaytaramiz
   } finally {
     setLoading(false);
   }

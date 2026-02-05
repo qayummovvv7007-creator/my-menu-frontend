@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-export default function AddProduct() {
+ function AddProduct() {
   const [form, setForm] = useState({ nomi: "", title: "", narxi: "", category: "", rasmi: "" });
   const [categories, setCategories] = useState([]); // Bazadan keladigan kategoriyalar
   const router = useRouter();
@@ -65,3 +65,5 @@ export default function AddProduct() {
     </div>
   );
 }
+
+export default AddProduct
