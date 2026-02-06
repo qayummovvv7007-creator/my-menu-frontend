@@ -53,5 +53,5 @@ const AddCategoryPage = () => {
   );
 };
 
-// 3. ENG MUHIMI: Vercel so'rayotgan eksport mana shu
+
 export default AddCategoryPage;
